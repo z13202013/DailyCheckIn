@@ -3,7 +3,8 @@ name: 哔哩哔哩签到
 on:
     workflow_dispatch:
     schedule:
-        - cron: "5 16 * * *"
+        - cron: "00 16 * * *"
+        #- cron: "5 16 * * *"
     watch:
         types: [started]
 
@@ -43,4 +44,18 @@ jobs:
                   DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
                   DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
                   QYWX_AM: ${{ secrets.QYWX_AM}}
+
+            - name:  ${{ env.CACHE_NAME }}
+            #- name: 缓存 Pip 模块
+              uses: actions/cache@v2
+              env:
+                CACHE_NAME:  缓存 Pip 模块
+              with:
+                # This path is specific to Ubuntu
+                path: ~/.cache/pip
+                # Look to see if there is a cache hit for the corresponding requirements file
+                key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+                restore-keys: |
+                  ${{ runner.os }}-pip-
+                  ${{ runner.os }}-
 #最后推送 2021年5月19日
