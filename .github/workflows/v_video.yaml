@@ -12,14 +12,18 @@ jobs:
         runs-on: ubuntu-latest
         if: github.event.repository.owner.id == github.event.sender.id
         steps:
-            - uses: actions/checkout@v1
-            - name: Use Node.js 10.x
+            - name: 查看
+              uses: actions/checkout@v1
+            
+            - name: 使用 Node.js 10.x
               uses: actions/setup-node@v1
               with:
                   node-version: 10.x
-            - name: npm install
+                  
+            - name: npm 安装
               run: |
                   npm install
+                  
             - name: "运行【腾讯视频签到】"
               run: |
                   node function/q_video/q_video.js
@@ -41,4 +45,20 @@ jobs:
                   BARK_SOUND: ${{ secrets.BARK_SOUND }}
                   DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
                   DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
+                  
+            - name:  ${{ env.CACHE_NAME }}
+            #- name: 缓存 Node.js 模块
+              uses: actions/cache@v2
+              env:
+                CACHE_NAME: 缓存 Node.js 模块
+              with:
+                # npm cache files are stored in `~/.npm` on Linux/macOS
+                path: ~/.npm
+                key: ${{ runner.os }}-build-${{ env.CACHE_NAME }}-${{ hashFiles('**/package-lock.json') }}
+                #key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}
+                restore-keys: |
+                  ${{ runner.os }}-build-${{ env.cache-name }}-
+                  ${{ runner.os }}-build-
+                  #${{ runner.OS }}-node-
+                  ${{ runner.OS }}-
 #最后推送 2021年5月19日
