@@ -109,7 +109,8 @@ class sendNotify:
 
     def serverNotify(self, text, desp):
         if sendNotify.SCKEY != '':
-            url = 'https://sctapi.ftqq.com/' + sendNotify.SCKEY + '.send'
+            #url = 'https://sctapi.ftqq.com/' + sendNotify.SCKEY + '.send'
+            url = 'https://sc.ftqq.com/' + sendNotify.SCKEY + '.send'
             if "\n" in desp:
                 desp = desp.replace("\n", "\n\n")
             data = {
