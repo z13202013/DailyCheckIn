@@ -119,7 +119,11 @@ class sendNotify:
             }
             response = json.dumps(requests.post(url, data).json(), ensure_ascii=False)
             datas = json.loads(response)
-             print(datas)
+#             print(datas)
+            if datas['errno'] == 0:
+                print('\nserver酱发送通知消息成功\n')
+            else:
+                print('\n发送通知调用API失败！！\n')
 #             if datas['code'] == 0:
 #                 print('\nserver酱发送通知消息成功\n')
 #             elif datas['code'] == 40001:
