@@ -119,13 +119,13 @@ class sendNotify:
             }
             response = json.dumps(requests.post(url, data).json(), ensure_ascii=False)
             datas = json.loads(response)
-             print(datas)
-#             if datas['code'] == 0:
-#                 print('\nserver酱发送通知消息成功\n')
-#             elif datas['code'] == 40001:
-#                 print('\nPUSH_KEY 错误\n')
-#             else:
-#                 print('\n发送通知调用API失败！！\n')
+            print(datas)
+            if datas['code'] == 0:
+                print('\nserver酱发送通知消息成功\n')
+            elif datas['code'] == 40001:
+                print('\nPUSH_KEY 错误\n')
+            else:
+                print('\n发送通知调用API失败！！\n')
         else:
             print('\n您未提供server酱的SCKEY，取消微信推送消息通知\n')
             pass
